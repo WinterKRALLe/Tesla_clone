@@ -1,0 +1,272 @@
+---
+const MenuLinks = [
+    {link: "#", text: "Model S"},
+    {link: "#", text: "Model 3"},
+    {link: "#", text: "Model X"},
+    {link: "#", text: "Model Y"},
+    {link: "#", text: "Solar Roof"},
+    {link: "#", text: "Solar Panels"}
+]
+
+const BurgerNavLinks = [
+    {link: "#", text: "Existing Inventory"},
+    {link: "#", text: "Used Inventory"},
+    {link: "#", text: "Trade-In"},
+    {link: "#", text: "Demo Drive"},
+    {link: "#", text: "Insurance"},
+    {link: "#", text: "Cybertruck"},
+    {link: "#", text: "Roadster"},
+    {link: "#", text: "Semi"},
+    {link: "#", text: "Charging"},
+    {link: "#", text: "Powerwall"},
+    {link: "#", text: "Commercial Energy"},
+    {link: "#", text: "Utilities"},
+    {link: "#", text: "Find Us"},
+    {link: "#", text: "Support"},
+    {link: "#", text: "Investor Relations"}
+]
+---
+
+<header class="Header">
+    <nav class="Nav">
+    <a href="/" class="Logo">
+        <img src="/Images/Logo.svg" alt="logo">
+    </a>
+    <ul class="Menu">
+        { MenuLinks && MenuLinks.map(l => (
+            <li><a href={l.link}>{l.text}</a></li>
+        ))}
+    </ul>
+    <ul class="MenuRight">
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Account</a></li>
+        <li><button id="openButton"><span>Menu</span></button></li>
+    </ul>
+</nav>
+    <ul class="BurgerNav">
+        <div class="CloseBtn">
+            <button id="closeButton"><span></span></button>
+        </div>
+        <ol>
+        {BurgerNavLinks && BurgerNavLinks.map(l => (
+            <li><a href={l.link}>{l.text}</a></li>
+        ))}
+        </ol>
+    </ul>
+    
+</header>
+
+<script>
+    const openButton = document.getElementById("openButton");
+    const closeButton = document.getElementById("closeButton");
+    const sideBar = document.querySelector(".BurgerNav");
+    const overlay = document.querySelector(".overlay");
+
+
+    overlay.addEventListener("click", function() {
+        sideBar.classList.remove("BurgerNavActive")
+        overlay.classList.remove("blur")
+    });
+    openButton.addEventListener("click", function() {
+        sideBar.classList.add("BurgerNavActive")
+        overlay.classList.add("blur");
+    });
+    closeButton.addEventListener("click", function() {
+        sideBar.classList.remove("BurgerNavActive")
+        overlay.classList.remove("blur");
+    });
+</script>
+
+<style lang="scss">
+.Nav {
+    min-height: 3.5rem;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    
+    a {
+        width: 125px;
+        height: auto;
+        text-decoration: none;
+    }
+}
+.Menu, .MenuRight {
+    font-weight: 600;
+    font-size: 14px;
+
+    ul li a {
+        display: block;
+    }
+}
+.Menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    
+    a {
+        padding: .5rem 1rem;
+        flex-wrap: nowrap;
+        
+        &:hover {
+            background-color: rgba(0, 0, 0, .05);
+            border-radius: 5px;
+        }
+    }
+
+    @media screen and (max-width: 1100px) {
+        display: none;
+    }
+}
+.MenuRight {
+    display: flex;
+    align-items: center;
+    
+    li {
+        padding: .5rem 1rem;
+        flex-wrap: nowrap;
+        border: none;
+        background: transparent;
+
+        @media screen and (max-width: 468px) {
+            display: none;
+        }
+
+        &:last-child {
+            padding: 0;
+        }
+        
+        &:hover {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, .05);
+            border-radius: 5px;
+        }
+        
+        button {
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 14px;
+            padding: .5rem 1rem;
+
+            span {
+                display: block;
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+.BurgerNav {
+    color: #1b1a1d;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #FFF;
+    width: 20rem;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform .4s;
+    font-size: 14px;
+    display: block;
+
+
+    a {
+        text-decoration: none;
+    }
+
+    .CloseBtn {
+        width: 100%;
+        height: 10%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        
+        button {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            
+            &:hover {
+                border-radius: 5px;
+                background-color: rgba(0, 0, 0, .05);
+                cursor: pointer;
+            }
+            
+            span {
+                display: block;
+                position: relative;
+                margin: auto;
+                
+                &:after, &:before {
+                    content: "";
+                    position: absolute;
+                    margin: auto;
+                    left: 0;
+                    right: 0;
+                    display: block;
+                    width: 60%;
+                    height: 3px;
+                    background: #8e8e8e;
+                    border-radius: 20px;
+                }
+                
+                &::after {
+                    transform: rotate(45deg);
+                }
+                
+                &::before {
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+    }
+    
+    ol {
+        display: flex;
+        flex-direction: column;
+        row-gap: .5rem;
+        width: 100%;
+        
+        li {
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: .5rem 1rem;
+            font-weight: 500;
+            
+            
+            &:hover {
+                background-color: rgba(0, 0, 0, .05);
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            
+            a {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    
+}
+.BurgerNavActive {
+    transform: translateX(0);
+    z-index: 10;
+
+}
+
+
+</style>

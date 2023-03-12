@@ -1,0 +1,87 @@
+---
+import "../styles/global.css"
+import Header from "../components/Header.astro";
+import Section from "../components/Section.astro";
+
+import DownArrow from "./down-arrow.svg?raw"
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon-96x96.png" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<div class="overlay"></div>
+		<Header />
+		<main class="Container">
+			<Section title="Model 3"
+			description="<p>Leasing starting at $399/mo</p>"
+			leftBtnText="Custom Order"
+			rightBtnText="Demo Drive"
+			backgroundImg="Homepage-Model-3.jpg"
+			svg={`<a href="#ModelY">${DownArrow}</a>`}
+			/>
+			<Section title="Model Y"
+			id="ModelY"
+			leftBtnText="Custom Order"
+			rightBtnText="Demo Drive"
+			backgroundImg="Homepage-Model-Y.jpg"
+			/>
+			<Section title="Model S"
+			description='<a href="#">Schedule a Demo Drive</a>'
+			leftBtnText="Custom Order"
+			rightBtnText="View Inventory"
+			backgroundImg="Homepage-Model-S.jpg"
+			/>
+			<Section title="Model X"
+			description='<a href="#">Schedule a Demo Drive</a>'
+			leftBtnText="Custom Order"
+			rightBtnText="View Inventory"
+			backgroundImg="Homepage-Model-X.jpg"
+			/>
+			<Section title="Solar Panels"
+			description="<p>Lowest Cost Solar Panels in America</p>"
+			leftBtnText="Order Now"
+			rightBtnText="Learn More"
+			backgroundImg="Homepage-Solar-Panels.jpg"
+			/>
+			<Section title="Solar Roof"
+			description="<p>Produce Clean Energy From Your Roof</p>"
+			leftBtnText="Order Now"
+			rightBtnText="Learn More"
+			backgroundImg="Homepage-Solar-Roof.jpg"
+			/>
+			<Section title="Accessories"
+			leftBtnText="Shop Now"
+			backgroundImg="Homepage-Accessories.jpg"
+			/>
+		</main>
+</body>
+</html>
+	
+<style lang="scss">
+		.Container {
+			height: 100vh;
+			overflow: scroll;
+			overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    
+    a {
+        text-decoration: underline;
+    }
+}
+.blur {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, .1);
+	backdrop-filter: blur(4px);
+	z-index: 1;
+}
+</style>

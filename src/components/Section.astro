@@ -1,0 +1,116 @@
+---
+export interface Props {
+    id?: string,
+    title: string;
+    description?: string;
+    leftBtnText: string;
+    rightBtnText?: string;
+    backgroundImg: string;
+    svg?: any;
+}
+
+const { id, title, description, leftBtnText, rightBtnText, backgroundImg, svg } = Astro.props as Props;
+
+---
+
+<section class="Section" id={id} style={`background-image: url(/Images/${backgroundImg})`} >
+    <div class="Wrap">
+        <div class="ItemText">
+            <h1>{ title }</h1>
+            { description ? <Fragment set:html={description} /> : null }
+        </div>
+        <div class:list={["ButtonGroup", {isSvg: svg ? true : false}]}>
+            <div class="LeftButton">
+                { leftBtnText }
+            </div>
+            { rightBtnText ? <div class="RightButton">{ rightBtnText }</div> : null }
+        </div>
+    </div>
+    { svg ? <div class="DownArrow" set:html={svg}></div> : null } 
+</section>
+
+<style lang="scss">
+.Section {
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    scroll-snap-align: center;
+    scroll-behavior: smooth;
+    
+    .Wrap {
+        height: 95%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        
+    }
+}
+.ItemText {
+    padding-top: 15vh;
+    text-align: center;
+    
+    h1 {
+        font-weight: 600;
+        font-size: 40px;
+    }
+
+    p {
+        font-weight: 500;
+        font-size: 18px;
+        margin-top: 5px;
+    }
+}
+.ButtonGroup {
+    display: flex;
+    margin-bottom: 1.5rem;
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+.LeftButton, .RightButton {
+    background-color: #3b3d41;
+    backdrop-filter: 8px;
+    height: 2.5rem;
+    width: 16.5rem;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: .75rem;
+}
+.RightButton {
+    background-color: rgba(255, 255, 255, .7);
+    color: #000;
+}
+.DownArrow {
+    display: block;
+    margin: 0 auto .25rem;
+    height: 2rem;
+    width: 2rem;
+    animation: animateDown infinite 1.5s;
+    transition: .5s ease;
+    scroll-behavior: smooth;
+
+    @keyframes animateDown {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(5px);
+    }
+    60% {
+        transform: translateY(3px);
+    }
+}
+}
+</style>
